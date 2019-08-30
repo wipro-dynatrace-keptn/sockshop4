@@ -1,0 +1,19 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: sockshop4-staging-carts
+spec:
+  hosts:
+  - "carts.sockshop4-staging.34.93.47.222.xip.io"
+  gateways:
+  - sockshop4-staging-gateway
+  http:
+    - route:
+      - destination:
+          host: carts.sockshop4-staging.svc.cluster.local
+          subset: blue
+        weight: 0
+      - destination:
+          host: carts.sockshop4-staging.svc.cluster.local
+          subset: green
+        weight: 100
